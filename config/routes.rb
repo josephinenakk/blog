@@ -2,6 +2,13 @@ Rails.application.routes.draw do
   resources :articles
   resources :articles
   resources :articles
+  resources :users
+  resource :session, :only => [:new, :create, :destroy]
+  get '/login' => "sessions#new", :as => "login"
+  get '/logout' => "sessions#destroy", :as => "logout"
+  resources :articles do
+    resources :comments
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
